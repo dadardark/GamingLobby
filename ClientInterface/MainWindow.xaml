@@ -1,0 +1,15 @@
+﻿<Window x:Class="ClientInterface.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClientInterface"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TextBox Name ="displayUsername" HorizontalAlignment="Left" Height="46" Margin="309,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" TextChanged="TextBox_TextChanged" IsReadOnly="true"/>
+        <TextBox Name ="enterUsername" HorizontalAlignment="Left" Height="46" Margin="309,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" TextChanged="TextBox_TextChanged" Text="&#xD;&#xA;Enter username"/>
+        <Button Name="createUser" Content="Create user" HorizontalAlignment="Left" Height="37" Margin="360,335,0,0" VerticalAlignment="Top" Width="97" Click="Button_Click"/>
+
+    </Grid>
+</Window>
