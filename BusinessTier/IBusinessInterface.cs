@@ -15,6 +15,8 @@ namespace BusinessTier
         void addUser(String inName);
         [OperationContract]
         void addLobby(String lobbyName);
+        [OperationContract]
+        bool getUser(String username);
 
 
     }

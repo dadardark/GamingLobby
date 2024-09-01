@@ -27,10 +27,18 @@ namespace LobbyDatabase
         {
             users.Add(inUser);  
         }
-
+        
         public string getName()
         {
             return lobbyName;
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            foreach (User user in users)
+            {
+                yield return user.username;
+            }
         }
     }
 }
