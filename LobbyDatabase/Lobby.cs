@@ -27,5 +27,10 @@ namespace LobbyDatabase
         {
             users.Add(inUser);  
         }
+
+        public string getName()
+        {
+            return lobbyName;
+        }
     }
 }

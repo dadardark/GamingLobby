@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 using LobbyDatabase;
 
 namespace BusinessTier
@@ -22,9 +23,21 @@ namespace BusinessTier
             lobbyList.lobbyList.Add(lobby); 
         }
 
-        public void addUser(String username, String lobbyName) 
+        public void addUser(String username) 
         {
+            User user = new User(username);
+        }
 
+        public Lobby getLobby(String lobbyName) 
+        {
+            foreach(Lobby lobby in lobbyList)
+            {
+                if (lobbyName.Equals(lobby.lobbyName))
+                {
+                    return lobby;
+                }
+            }
+            return null;
         }
 
     }

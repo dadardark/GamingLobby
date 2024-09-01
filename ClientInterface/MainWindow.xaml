@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TextBox Name ="displayUsername" HorizontalAlignment="Left" Height="46" Margin="309,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" TextChanged="TextBox_TextChanged" IsReadOnly="true"/>
-        <TextBox Name ="enterUsername" HorizontalAlignment="Left" Height="46" Margin="309,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" TextChanged="TextBox_TextChanged" Text="&#xD;&#xA;Enter username"/>
-        <Button Name="createUser" Content="Create user" HorizontalAlignment="Left" Height="37" Margin="360,335,0,0" VerticalAlignment="Top" Width="97" Click="Button_Click"/>
-
+        <Frame 
+            x:Name="Login">
+        </Frame>
     </Grid>
+    
 </Window>

@@ -11,6 +11,11 @@ namespace BusinessTier
     [ServiceContract]
     public interface IBusinessInterface
     {
-        
+        [OperationContract]
+        void addUser(String inName);
+        [OperationContract]
+        void addLobby(String lobbyName);
+
+
     }
 }
