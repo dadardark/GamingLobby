@@ -40,5 +40,21 @@ namespace BusinessTier
             return null;
         }
 
+        public bool getUser(String username)
+        {
+            foreach (Lobby lobby in lobbyList)
+            {
+                foreach(User user in lobby)
+                {
+                    if (user.username.Equals(username))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+
+        }
+
     }
 }

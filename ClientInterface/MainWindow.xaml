@@ -6,10 +6,8 @@
         xmlns:local="clr-namespace:ClientInterface"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Frame 
-            x:Name="Login">
-        </Frame>
-    </Grid>
-    
+    <Frame 
+        x:Name="MainFrame">
+    </Frame>
+
 </Window>

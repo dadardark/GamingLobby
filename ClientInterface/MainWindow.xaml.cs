@@ -16,20 +16,7 @@ namespace ClientInterface
         public MainWindow()
         {
             InitializeComponent();
-            try
-            {
-                LobbyList lobbyList = new LobbyList();
-                Login login = new Login();
-            
-                Content = login;
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);    
-            }
-        }
-
-        
+            MainFrame.Navigate(new Login());          
+        } 
     }
 }
