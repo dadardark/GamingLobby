@@ -1,17 +1,17 @@
-﻿using System.ServiceModel;
+﻿using System.Diagnostics;
+using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using BusinessTier;
+using LobbyDatabase;
 
 namespace ClientInterface
 {
-    /// <summary>
-    /// Interaction logic for Login.xaml
-    /// </summary>
     public partial class Login : Page
     {
         IBusinessInterface foob;
-        
+        private Lobby loginLobby;
         public Login()
         {
             InitializeComponent();
@@ -21,15 +21,27 @@ namespace ClientInterface
             string url = "net.tcp://localhost:8100/BusinessServer";
             foobFactory = new ChannelFactory<IBusinessInterface>(tcp, url);
             foob = foobFactory.CreateChannel();
-        }
+
+            loginLobby = Lobby.Instance;
+            loginLobby.setName("LoginLobby");
+            foob.addLobby(loginLobby);
+
+            foob.addUser(loginLobby.getName(), new User("Jacob"));
+        }   
         private void createUserClick(object sender, RoutedEventArgs e)
         {
-            if (foob.getUser(enterUsername.Text.ToString()) == true)
-            {
-                foob.addUser(enterUsername.Text.ToString());
-                displayUsername.Visibility = Visibility.Visible;
-                displayUsername.Text = "Welcome " + enterUsername.Text;
+            string newUsername = enterUsername.Text.ToString();
 
+            if (foob == null)
+            {
+                MessageBox.Show("Service is not available.");
+                return;
+            }
+
+            if (foob.getUser(loginLobby.lobbyName,newUsername))
+            {
+                foob.addUser(loginLobby.lobbyName,new User(newUsername));
+                
                 LobbyList lobbyList = new LobbyList();
                 this.NavigationService.Navigate(lobbyList);
             }

@@ -114,6 +114,13 @@
       <Project>{8c3b707b-7634-465a-9811-075c8b1622c3}</Project>
       <Name>BusinessTier</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LobbyDatabase\LobbyDatabase.csproj">
+      <Project>{73B5762C-1E25-479A-97BE-BCBB3067F687}</Project>
+      <Name>LobbyDatabase</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

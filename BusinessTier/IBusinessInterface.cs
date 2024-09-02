@@ -12,12 +12,14 @@ namespace BusinessTier
     public interface IBusinessInterface
     {
         [OperationContract]
-        void addUser(String inName);
+        void addLobby(Lobby inLobby);
         [OperationContract]
-        void addLobby(String lobbyName);
+        Lobby getLobby(String lobbyName);
         [OperationContract]
-        bool getUser(String username);
-
-
+        int getSize();
+        [OperationContract]
+        bool addUser(String lobbyName, User inUser);
+        [OperationContract]
+        bool getUser(String lobbyName, String inUsername);
     }
 }
