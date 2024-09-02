@@ -60,6 +60,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="LobbyRoomTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -74,6 +78,9 @@
     </Compile>
     <Compile Include="LobbyList.xaml.cs">
       <DependentUpon>LobbyList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LobbyRoomTemplate.xaml.cs">
+      <DependentUpon>LobbyRoomTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
