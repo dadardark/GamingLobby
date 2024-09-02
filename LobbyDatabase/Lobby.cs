@@ -20,19 +20,10 @@ namespace LobbyDatabase
             lobbyName = null;
             users = new List<User>();
         }
-        public static Lobby Instance
+        public Lobby(string lobbyName)
         {
-            get
-            {
-                lock (_lock)
-                {
-                    if (_instance == null)
-                    {
-                        _instance = new Lobby();
-                    }
-                    return _instance;
-                }
-            }
+            this.lobbyName = lobbyName;
+            users = new List<User>();
         }
 
         public void setName(String inName)

@@ -48,6 +48,7 @@ namespace BusinessTier
             if (exisitingUser)
             {
                 inLobby.users.Add(inUser);
+                Debug.WriteLine(inUser.username + " is added to " + inLobby.lobbyName);
                 return true;
             }
             Debug.WriteLine("User not added");
@@ -58,9 +59,12 @@ namespace BusinessTier
         {
             Lobby inLobby = getLobby(lobbyName);
 
+            Debug.WriteLine("getUser: Lobby name: "+inLobby.lobbyName);
+
             foreach (User user in inLobby.users)
             {
-                if (user.Equals(inUsername))
+                Debug.WriteLine("getUser: User name: " + user.username);
+                if (user.username.Equals(inUsername))
                 {
                     Debug.WriteLine("User exists");
                     return false;

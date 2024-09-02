@@ -22,8 +22,7 @@ namespace ClientInterface
             foobFactory = new ChannelFactory<IBusinessInterface>(tcp, url);
             foob = foobFactory.CreateChannel();
 
-            loginLobby = Lobby.Instance;
-            loginLobby.setName("LoginLobby");
+            loginLobby = new Lobby("LoginLobby");
             foob.addLobby(loginLobby);
 
             foob.addUser(loginLobby.getName(), new User("Jacob"));
