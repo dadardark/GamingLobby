@@ -16,25 +16,10 @@ namespace BusinessTier
     public class BusinessServer : IBusinessInterface
     {
         private List<Lobby> lobbyList;
-        private List<IClientCallback> callbacks = new List<IClientCallback>();
         public BusinessServer() 
         {
             lobbyList = new List<Lobby>();
-        }
-
-        public IClientCallback getCallback()
-        {
-            return OperationContext.Current.GetCallbackChannel<IClientCallback>();
-        }
-
-        private void NotifyClients(string lobbyName, User user)
-        {
-            foreach (var callback in callbacks)
-            {   
-                callback.userAdded(lobbyName, user);
-            }
-        }
-
+        } 
         public bool addLobby(Lobby inLobby)
         {
             foreach (var lobby in lobbyList)
@@ -71,7 +56,6 @@ namespace BusinessTier
             if (exisitingUser)
             {
                 inLobby.users.Add(inUser);
-                NotifyClients(lobbyName, inUser);
                 return true;
             }
             Debug.WriteLine("User not added");
@@ -88,12 +72,9 @@ namespace BusinessTier
                 return false;
             }
 
-
-            Debug.WriteLine("getUser: Lobby name: "+inLobby.lobbyName);
-
             foreach (User user in inLobby.users)
             {
-                Debug.WriteLine("getUser: User name: " + user.username);
+  
                 if (user.username.Equals(inUsername))
                 {
                     Debug.WriteLine("User exists");
@@ -105,15 +86,6 @@ namespace BusinessTier
         public int getSize()
         {
             return lobbyList.Count;
-        }
-
-    }
-
-    public class ClientCallBack : IClientCallback
-    {
-        public void userAdded(String lobbyName, User user) 
-        {
-            Debug.WriteLine(user.username + " added to lobby: "+lobbyName);
         }
     }
 }
