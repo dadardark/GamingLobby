@@ -1,59 +1,95 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Schema;
+using System.Windows;
 using LobbyDatabase;
 
 namespace BusinessTier
 {
+    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple, UseSynchronizationContext = false)]
     public class BusinessServer : IBusinessInterface
     {
-        private LobbyList lobbyList;
+        private List<Lobby> lobbyList;
         public BusinessServer() 
         {
-            lobbyList = new LobbyList();
+            lobbyList = new List<Lobby>();
         }
 
-        public void addLobby(String lobbyName)
+        public bool addLobby(Lobby inLobby)
         {
-            Lobby lobby = new Lobby();
-            lobby.lobbyName = lobbyName;
-            lobbyList.lobbyList.Add(lobby); 
-        }
-
-        public void addUser(String username) 
-        {
-            User user = new User(username);
+            foreach (var lobby in lobbyList)
+            {
+                if (lobby != null && lobby.lobbyName.Equals(inLobby.lobbyName, StringComparison.OrdinalIgnoreCase))
+                {
+                    Debug.WriteLine("Lobby Exists already. Not added");
+                    return false;
+                }
+            }
+            lobbyList.Add(inLobby);
+            return true;
         }
 
         public Lobby getLobby(String lobbyName) 
         {
-            foreach(Lobby lobby in lobbyList)
+            foreach(var lobby in lobbyList)
             {
-                if (lobbyName.Equals(lobby.lobbyName))
+                if (lobby != null && lobbyName.Equals(lobby.lobbyName))
                 {
                     return lobby;
                 }
             }
+            Debug.WriteLine("Lobby not found");
             return null;
         }
 
-        public bool getUser(String username)
+        public bool addUser(String lobbyName, User inUser)
         {
-            foreach (Lobby lobby in lobbyList)
+            Lobby inLobby = getLobby(lobbyName);
+
+            bool exisitingUser = getUser(lobbyName, inUser.username);
+
+            if (exisitingUser)
             {
-                foreach(User user in lobby)
+                inLobby.users.Add(inUser);
+                return true;
+            }
+            Debug.WriteLine("User not added");
+            return false;
+        }
+
+        public bool getUser(String lobbyName, String inUsername) 
+        {
+            Lobby inLobby = getLobby(lobbyName);
+            
+            if(inLobby == null)
+            {
+                Debug.WriteLine("Not returning a lobby");
+                return false;
+            }
+
+
+            Debug.WriteLine("getUser: Lobby name: "+inLobby.lobbyName);
+
+            foreach (User user in inLobby.users)
+            {
+                Debug.WriteLine("getUser: User name: " + user.username);
+                if (user.username.Equals(inUsername))
                 {
-                    if (user.username.Equals(username))
-                    {
-                        return false;
-                    }
+                    Debug.WriteLine("User exists");
+                    return false;
                 }
             }
             return true;
-
+        }
+        public int getSize()
+        {
+            return lobbyList.Count;
         }
 
     }

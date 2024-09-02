@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,10 +12,17 @@ namespace LobbyDatabase
     {
         public string lobbyName;
         public List<User> users;
+        private static Lobby _instance;
+        private static readonly object _lock = new object();
 
-        public Lobby() 
+        private Lobby() 
         {
             lobbyName = null;
+            users = new List<User>();
+        }
+        public Lobby(string lobbyName)
+        {
+            this.lobbyName = lobbyName;
             users = new List<User>();
         }
 
@@ -31,6 +39,18 @@ namespace LobbyDatabase
         public string getName()
         {
             return lobbyName;
+        }
+
+        public bool getUserName(String inName)
+        {
+            foreach(User user in users)
+            {
+                if (user.username.Equals(inName)) 
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public IEnumerator GetEnumerator()
