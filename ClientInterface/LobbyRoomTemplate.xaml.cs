@@ -22,6 +22,12 @@ namespace ClientInterface
             Lobby currentLobby = foob.getLobby(lobbyName);
 
             roomName.Text = currentLobby.lobbyName;
+            roomMessages.Text = "";
+        }
+
+        private void sendMessage_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            roomMessages.Text = roomMessages.Text + chatBox.Text + "\n";
         }
     }
 }
