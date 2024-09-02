@@ -25,7 +25,7 @@ namespace ClientInterface
             loginLobby = new Lobby("LoginLobby");
             foob.addLobby(loginLobby);
 
-            foob.addUser(loginLobby.getName(), new User("Jacob"));
+            foob.addUser(loginLobby.lobbyName, new User("Jacob"));
         }   
         private void createUserClick(object sender, RoutedEventArgs e)
         {

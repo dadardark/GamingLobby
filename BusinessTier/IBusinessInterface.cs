@@ -12,7 +12,7 @@ namespace BusinessTier
     public interface IBusinessInterface
     {
         [OperationContract]
-        void addLobby(Lobby inLobby);
+        bool addLobby(Lobby inLobby);
         [OperationContract]
         Lobby getLobby(String lobbyName);
         [OperationContract]

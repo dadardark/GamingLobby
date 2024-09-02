@@ -21,16 +21,25 @@ namespace BusinessTier
             lobbyList = new List<Lobby>();
         }
 
-        public void addLobby(Lobby inLobby)
+        public bool addLobby(Lobby inLobby)
         {
-            lobbyList.Add(inLobby); 
+            foreach (var lobby in lobbyList)
+            {
+                if (lobby != null && lobby.lobbyName.Equals(inLobby.lobbyName, StringComparison.OrdinalIgnoreCase))
+                {
+                    Debug.WriteLine("Lobby Exists already. Not added");
+                    return false;
+                }
+            }
+            lobbyList.Add(inLobby);
+            return true;
         }
 
         public Lobby getLobby(String lobbyName) 
         {
             foreach(var lobby in lobbyList)
             {
-                if (lobby != null && lobbyName.Equals(lobby.lobbyName, StringComparison.OrdinalIgnoreCase))
+                if (lobby != null && lobbyName.Equals(lobby.lobbyName))
                 {
                     return lobby;
                 }
@@ -48,7 +57,6 @@ namespace BusinessTier
             if (exisitingUser)
             {
                 inLobby.users.Add(inUser);
-                Debug.WriteLine(inUser.username + " is added to " + inLobby.lobbyName);
                 return true;
             }
             Debug.WriteLine("User not added");
@@ -58,6 +66,13 @@ namespace BusinessTier
         public bool getUser(String lobbyName, String inUsername) 
         {
             Lobby inLobby = getLobby(lobbyName);
+            
+            if(inLobby == null)
+            {
+                Debug.WriteLine("Not returning a lobby");
+                return false;
+            }
+
 
             Debug.WriteLine("getUser: Lobby name: "+inLobby.lobbyName);
 
