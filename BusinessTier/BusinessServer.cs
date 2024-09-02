@@ -12,7 +12,7 @@ using LobbyDatabase;
 
 namespace BusinessTier
 {
-    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple, UseSynchronizationContext = false)]
+    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple, InstanceContextMode = InstanceContextMode.Single)] 
     public class BusinessServer : IBusinessInterface
     {
         private List<Lobby> lobbyList;
