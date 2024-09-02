@@ -8,7 +8,7 @@ using LobbyDatabase;
 
 namespace BusinessTier
 {
-    [ServiceContract]
+    [ServiceContract(CallbackContract = typeof(IClientCallback))]
     public interface IBusinessInterface
     {
         [OperationContract]
@@ -21,5 +21,12 @@ namespace BusinessTier
         bool addUser(String lobbyName, User inUser);
         [OperationContract]
         bool getUser(String lobbyName, String inUsername);
+    }
+
+    [ServiceContract]
+    public interface IClientCallback
+    {
+        [OperationContract(IsOneWay = true)]
+        void userAdded(String lobbyname, User user);
     }
 }

@@ -17,7 +17,6 @@ namespace GamingLobby
 
                 host.Open();
                 Console.WriteLine("Server ready at {0} ", baseAddress);
-                Console.WriteLine("Press enter to stop the service. ");
                 Console.ReadLine();
 
                 host.Close();
