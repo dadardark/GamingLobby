@@ -10,16 +10,20 @@ namespace ClientInterface
 {
     public partial class Login : Page
     {
-        IBusinessInterface foob;
+        private IBusinessInterface foob;
+        private IClientCallback callBack;
         private Lobby loginLobby;
         public Login()
         {
             InitializeComponent();
-            ChannelFactory<IBusinessInterface> foobFactory;
+            DuplexChannelFactory<IBusinessInterface> foobFactory;
             NetTcpBinding tcp = new NetTcpBinding();
 
+            callBack = new ClientCallBack();
+            InstanceContext instanceContext = new InstanceContext(callBack);
+
             string url = "net.tcp://localhost:8100/BusinessServer";
-            foobFactory = new ChannelFactory<IBusinessInterface>(tcp, url);
+            foobFactory = new DuplexChannelFactory<IBusinessInterface>(instanceContext,tcp, url);
             foob = foobFactory.CreateChannel();
 
             loginLobby = new Lobby("LoginLobby");

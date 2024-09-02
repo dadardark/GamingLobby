@@ -12,8 +12,6 @@ namespace LobbyDatabase
     {
         public string lobbyName;
         public List<User> users;
-        private static Lobby _instance;
-        private static readonly object _lock = new object();
 
         private Lobby() 
         {
