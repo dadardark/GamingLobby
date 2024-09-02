@@ -5,15 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ClientInterface"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="900" d:DesignWidth="1600"
       Title="Login">
 
     <Grid>
         <Grid>
-            <TextBox Name ="login" Margin="346,34,0,0" FontSize="48" BorderThickness="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">Login</TextBox>
-            <TextBox Name ="displayUsername" HorizontalAlignment="Left" Margin="310,117,0,154" TextWrapping="Wrap" Width="195"  IsReadOnly="true" Visibility="vISIBLE" FontSize="24" BorderThickness="0,0,0,0" TextAlignment="Center"/>
-            <Button Name="createUser" Content="Create user" Height="37" Margin="360,335,0,0" Width="97" Click="createUserClick" HorizontalAlignment="Left"/>
-            <TextBox x:Name="enterUsername" HorizontalAlignment="Left" Height="46" Margin="310,301,0,0" TextWrapping="WrapWithOverflow" Text="Enter a username" VerticalAlignment="Top" Width="195" FontWeight="Bold" TextAlignment="Center"/>
+            <TextBox Name ="login" Margin="0,52,0,0" FontSize="72" BorderThickness="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="1092" TextAlignment="Center" Height="208">Login</TextBox>
+            <Button Name="createUser" Content="Create user" Margin="0,685,0,103" Width="426" Click="createUserClick" HorizontalAlignment="Center" FontSize="24"/>
+            <TextBox x:Name="enterUsername" HorizontalAlignment="Center" Height="163" TextWrapping="WrapWithOverflow" Text="Enter a username" VerticalAlignment="Center" Width="496" FontWeight="Bold" TextAlignment="Center" FontSize="36"/>
         </Grid>
 
     </Grid>
