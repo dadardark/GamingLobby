@@ -11,7 +11,7 @@
     <Grid>
         <TextBlock Height="60" Margin="0,17,0,0" TextWrapping="Wrap" Width="528" TextAlignment="Center" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center"><Run Text="Welcome to the server"/><LineBreak/><Run Text="Please select a lobby"/></TextBlock>
         <StackPanel Margin="0,120,0,0" VerticalAlignment="Center">
-            <Button Name="lobby1" Content="Lobby 1" Click="lobby1Button_Click"/>
+            <Button Name="foodLobby" Content="Food" Click="foodLobbyButton_Click"/>
             <Button Content="Lobby 2"/>
             <Button Content="Lobby 3"/>
             <Button Content="Lobby 4"/>
