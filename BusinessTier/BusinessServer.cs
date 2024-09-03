@@ -25,8 +25,7 @@ namespace BusinessTier
             foreach (var lobby in lobbyList)
             {
                 if (lobby != null && lobby.lobbyName.Equals(inLobby.lobbyName, StringComparison.OrdinalIgnoreCase))
-                {
-                    Debug.WriteLine("Lobby Exists already. Not added");
+                {   
                     return false;
                 }
             }
@@ -57,8 +56,7 @@ namespace BusinessTier
             {
                 inLobby.users.Add(inUser);
                 return true;
-            }
-            Debug.WriteLine("User not added");
+            }    
             return false;
         }
 
@@ -76,8 +74,7 @@ namespace BusinessTier
             {
   
                 if (user.username.Equals(inUsername))
-                {
-                    Debug.WriteLine("User exists");
+                { 
                     return false;
                 }
             }
@@ -88,13 +85,10 @@ namespace BusinessTier
         {
             Lobby inLobby = getLobby(lobbyName);
             foreach (User user in inLobby.users.ToList())
-            {
-                Debug.WriteLine("Searching and found: "+ user.username);
+            {  
                 if (user.username.Equals(inUsername))
                 {
-                    inLobby.users.Remove(user);
-                    Debug.WriteLine("User exists");
-                    
+                    inLobby.users.Remove(user);  
                 }
             }   
         }
