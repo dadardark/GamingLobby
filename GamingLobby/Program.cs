@@ -11,15 +11,25 @@ namespace GamingLobby
         {
             Uri baseAddress = new Uri("net.tcp://localhost:8100/BusinessServer");
 
-            using (ServiceHost host = new ServiceHost(typeof(BusinessServer), baseAddress))
+            try
             {
-                host.AddServiceEndpoint(typeof(IBusinessInterface), new NetTcpBinding(), "");
+                using (ServiceHost host = new ServiceHost(typeof(BusinessServer), baseAddress))
+                {
+                    host.AddServiceEndpoint(typeof(IBusinessInterface), new NetTcpBinding(), "");
 
-                host.Open();
-                Console.WriteLine("Server ready at {0} ", baseAddress);
-                Console.ReadLine();
+                    host.Open();
+                    Console.WriteLine("Server ready at {0} ", baseAddress);
+                    Console.WriteLine("Press 'Q' to quit the server.");
 
-                host.Close();
+                    while (Console.ReadKey().Key != ConsoleKey.Q) { }
+
+                    host.Close();
+                    Console.WriteLine("Server shut down.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
             }
         }
     }
