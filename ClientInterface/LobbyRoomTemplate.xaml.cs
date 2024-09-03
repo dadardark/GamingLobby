@@ -11,7 +11,8 @@ namespace ClientInterface
     {
         private IBusinessInterface foob;
         Lobby currentLobby;
-        public LobbyRoomTemplate(String lobbyName)
+        User inUser;
+        public LobbyRoomTemplate(String lobbyName, User inUser)
         {
             InitializeComponent();
             ChannelFactory<IBusinessInterface> foobFactory;
@@ -20,6 +21,8 @@ namespace ClientInterface
             string url = "net.tcp://localhost:8100/BusinessServer";
             foobFactory = new ChannelFactory<IBusinessInterface>(tcp, url);
             foob = foobFactory.CreateChannel();
+
+            this.inUser = inUser;
 
             currentLobby = foob.getLobby(lobbyName);
 
@@ -33,7 +36,8 @@ namespace ClientInterface
 
         private void sendMessage_Click(object sender, RoutedEventArgs e)
         {
-            lobbyMessages.Items.Add(enterMessage.Text.ToString());   
+            foob.addMessage(lobbyTitle.Text,(DateTime.Now + " " + inUser.username + " : " + enterMessage.Text.ToString()));
+            lobbyMessages.Items.Add(DateTime.Now + " "+ inUser.username+ " : "+  enterMessage.Text.ToString());   
         }
 
         private void updateGUI_Click(object sender, RoutedEventArgs e)
@@ -44,6 +48,13 @@ namespace ClientInterface
                 if (!lobbyUsers.Items.Contains(user.username))
                 {
                     lobbyUsers.Items.Add(user.username);
+                }
+            }
+            foreach(String message in currentLobby.messages)
+            {
+                if (!lobbyMessages.Items.Contains(message))
+                {
+                    lobbyMessages.Items.Add(message);
                 }
             }
         }

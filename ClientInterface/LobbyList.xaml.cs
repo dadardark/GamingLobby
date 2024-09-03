@@ -30,7 +30,7 @@ namespace ClientInterface
             String lobbyName = (sender as Button).Content.ToString();
             foob.addLobby(new Lobby(lobbyName));
             foob.addUser(lobbyName,user);
-            this.NavigationService.Navigate(new LobbyRoomTemplate((sender as Button).Content.ToString()));
+            this.NavigationService.Navigate(new LobbyRoomTemplate((sender as Button).Content.ToString(),user));
         }
     }
 }
