@@ -12,6 +12,7 @@ namespace ClientInterface
     {
         private IBusinessInterface foob;
         User user;
+        Lobby lobby;
         public LobbyList(User user)
         {
             InitializeComponent();
@@ -22,7 +23,11 @@ namespace ClientInterface
             foobFactory = new ChannelFactory<IBusinessInterface>(tcp, url);
             foob = foobFactory.CreateChannel();
 
+            lobby = new Lobby("lobby");
+
             this.user = user;
+            foob.addLobby(lobby);
+            foob.addUser("lobby", user);
         }
 
         private void foodLobbyButton_Click(object sender, RoutedEventArgs e)
@@ -31,6 +36,12 @@ namespace ClientInterface
             foob.addLobby(new Lobby(lobbyName));
             foob.addUser(lobbyName,user);
             this.NavigationService.Navigate(new LobbyRoomTemplate((sender as Button).Content.ToString(),user));
+        }
+
+        private void logoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            foob.removeUser("loginLobby", user.username);
+            this.NavigationService.GoBack();
         }
     }
 }
