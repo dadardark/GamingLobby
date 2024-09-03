@@ -12,16 +12,19 @@ namespace LobbyDatabase
     {
         public string lobbyName;
         public List<User> users;
+        public List<String> messages;
 
         private Lobby() 
         {
             lobbyName = null;
             users = new List<User>();
+            messages = new List<String>();
         }
         public Lobby(string lobbyName)
         {
             this.lobbyName = lobbyName;
             users = new List<User>();
+            messages = new List<String>();
         }
 
         public void setName(String inName)
@@ -33,22 +36,15 @@ namespace LobbyDatabase
         {
             users.Add(inUser);  
         }
+
+        public void addMessage(String inMessage)
+        {
+            messages.Add(inMessage);
+        }
         
         public string getName()
         {
             return lobbyName;
-        }
-
-        public bool getUserName(String inName)
-        {
-            foreach(User user in users)
-            {
-                if (user.username.Equals(inName)) 
-                {
-                    return true;
-                }
-            }
-            return false;
         }
 
         public IEnumerator GetEnumerator()

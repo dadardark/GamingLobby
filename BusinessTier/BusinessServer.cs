@@ -83,6 +83,12 @@ namespace BusinessTier
             }
             return true;
         }
+
+        public void addMessage(String inLobby,String inMessage)
+        {
+            Lobby lobby = getLobby(inLobby);
+            lobby.addMessage(inMessage);
+        }
         public int getSize()
         {
             return lobbyList.Count;
