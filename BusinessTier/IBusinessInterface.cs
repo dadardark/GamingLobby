@@ -23,5 +23,7 @@ namespace BusinessTier
         bool getUser(String lobbyName, String inUsername);
         [OperationContract]
         void addMessage(String inLobby, String inMessage);
+        [OperationContract]
+        void removeUser(String lobbyName, string inUsername);
     }     
 }

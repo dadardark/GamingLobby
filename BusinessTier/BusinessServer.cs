@@ -84,6 +84,20 @@ namespace BusinessTier
             return true;
         }
 
+        public void removeUser(String lobbyName, string inUsername)
+        {
+            Lobby inLobby = getLobby(lobbyName);
+            foreach (User user in inLobby.users.ToList())
+            {
+                if (user.username.Equals(inUsername))
+                {
+                    inLobby.users.Remove(user);
+                    Debug.WriteLine("User exists");
+                    
+                }
+            }   
+        }
+
         public void addMessage(String inLobby,String inMessage)
         {
             Lobby lobby = getLobby(inLobby);
