@@ -8,22 +8,26 @@
       d:DesignHeight="900" d:DesignWidth="1600"
       Title="LobbyRoomTemplate">
 
-    <Grid>
+    <Grid Margin="0,10,0,0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="173*"/>
-            <ColumnDefinition Width="27*"/>
+            <ColumnDefinition Width="161*"/>
+            <ColumnDefinition Width="1173*"/>
+            <ColumnDefinition Width="266*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Name="roomName" HorizontalAlignment="Left" Height="91" Margin="154,10,0,0" TextWrapping="Wrap" Text="Room name" VerticalAlignment="Top" Width="1133" TextAlignment="Center" FontSize="36" Background="White"/>
-        <TextBlock Name="userList" HorizontalAlignment="Left" Height="691" Margin="1308,10,0,0" VerticalAlignment="Top" Width="258" Text="Users" FontSize="36" Background="White" TextWrapping="WrapWithOverflow" Grid.ColumnSpan="2"/>
-        <ScrollViewer Margin="0,-7,97,175">
-             <TextBlock Name="roomMessages" HorizontalAlignment="Left" Height="577" Margin="48,124,0,0" VerticalAlignment="Top" Width="1239" Text="Chat messages" FontSize="36" Background="White" TextWrapping="WrapWithOverflow">
-                <TextBlock.CacheMode>
-                    <BitmapCache/>
-                </TextBlock.CacheMode>
-            </TextBlock>
-        </ScrollViewer>
-        <TextBox Name="chatBox" HorizontalAlignment="Left" Height="107" Margin="48,730,0,0" TextWrapping="Wrap" Text="ChatBox" VerticalAlignment="Top" Width="1239" TextAlignment="Center" FontSize="36" Background="White"/>
-        <Button Name="exitLobby" HorizontalAlignment="Left" Height="91" Margin="48,10,0,0" VerticalAlignment="Top" Width="82" Content="Exit"/>
-        <Button x:Name="sendMessage" HorizontalAlignment="Left" Height="107" Margin="1308,730,0,0" VerticalAlignment="Top" Width="258" Content="Enter" Click="sendMessage_Click" Grid.ColumnSpan="2"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="156"/>
+            <RowDefinition Height="518"/>
+            <RowDefinition Height="156"/>
+        </Grid.RowDefinitions>
+
+
+        <Button Name="exitButton" Grid.Column="0" Grid.Row="0" Margin="16,16,16,16" Content="Exit" FontSize="24px" Click="exitButton_Click"/>
+        <TextBlock Name="lobbyTitle" Grid.Column="1" Grid.Row="0" Text="Lobby Name" Background="White" Margin="16,16,16,16" TextAlignment="Center" FontSize="48" FontWeight="Bold"/>
+        <ListView Name="lobbyMessages" Grid.ColumnSpan="2" Grid.Row="1" Background="White" Margin="16,16,16,16" FontSize="36"/>
+        <ListView Name="lobbyUsers" Grid.Column="2" Grid.Row="1" Background="White" Margin="16,16,16,16"/>
+        <TextBox Name="enterMessage" Grid.Row="2" Grid.ColumnSpan="2" Background="White" Margin="16,16,16,16" Text="Enter message" FontSize="36"/>
+        <Button Name="sendMessage" Grid.Row="2" Grid.Column="2" Margin="16,16,16,16" Content="Enter" FontSize="24px" Click="sendMessage_Click"/>
+        <Button Name ="updateGUI" Grid.Column="2" Grid.Row="0" Margin="16,16,16,16" Content="Update GUI" FontSize="24px" Click="updateGUI_Click"/>
     </Grid>
+
 </Page>
