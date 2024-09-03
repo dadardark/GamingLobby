@@ -37,9 +37,10 @@ namespace ClientInterface
 
             if (foob.getUser(loginLobby.lobbyName,newUsername))
             {
-                foob.addUser(loginLobby.lobbyName,new User(newUsername));
+                User newUser = new User(newUsername);
+                foob.addUser(loginLobby.lobbyName,newUser);
                 
-                LobbyList lobbyList = new LobbyList();
+                LobbyList lobbyList = new LobbyList(newUser);
                 this.NavigationService.Navigate(lobbyList);
             }
             else
