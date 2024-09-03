@@ -17,6 +17,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
             <RowDefinition Height="200*"/>
+            <RowDefinition Height="50*"/>
         </Grid.RowDefinitions>
         
         <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Height="60" Margin="0,17,0,0" TextWrapping="Wrap" Width="528" TextAlignment="Center" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center"><Run Text="Welcome to the server"/><LineBreak/><Run Text="Please select a lobby"/></TextBlock>
@@ -26,5 +27,6 @@
             <Button Content="Lobby 3"/>
             <Button Content="Lobby 4"/>
         </StackPanel>
+        <Button Name="logoutButton" Grid.Row="2" Grid.Column="1" Content="Log out" Margin="16,16,16,16" Click="logoutButton_Click"/>
     </Grid>
 </Page>

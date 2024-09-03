@@ -22,7 +22,7 @@ namespace ClientInterface
             foobFactory = new ChannelFactory<IBusinessInterface>(tcp, url);
             foob = foobFactory.CreateChannel();
 
-            loginLobby = new Lobby("LoginLobby");
+            loginLobby = new Lobby("loginLobby");
             foob.addLobby(loginLobby); 
         }   
         private void createUserClick(object sender, RoutedEventArgs e)

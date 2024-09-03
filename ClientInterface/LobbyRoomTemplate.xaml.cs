@@ -43,6 +43,8 @@ namespace ClientInterface
         private void updateGUI_Click(object sender, RoutedEventArgs e)
         {
             currentLobby = foob.getLobby(lobbyTitle.Text);
+            lobbyUsers.Items.Clear();
+
             foreach (User user in currentLobby.users)
             {
                 if (!lobbyUsers.Items.Contains(user.username))
@@ -58,7 +60,6 @@ namespace ClientInterface
                 }
             }
         }
-
         private void exitButton_Click(object sender, RoutedEventArgs e)
         {
             foob.removeUser(lobbyTitle.Text, inUser.username);

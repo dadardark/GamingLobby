@@ -89,6 +89,7 @@ namespace BusinessTier
             Lobby inLobby = getLobby(lobbyName);
             foreach (User user in inLobby.users.ToList())
             {
+                Debug.WriteLine("Searching and found: "+ user.username);
                 if (user.username.Equals(inUsername))
                 {
                     inLobby.users.Remove(user);
