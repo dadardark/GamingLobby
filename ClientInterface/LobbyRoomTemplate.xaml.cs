@@ -31,7 +31,14 @@ namespace ClientInterface
             foreach (User user in currentLobby.users)
             {
                 lobbyUsers.Items.Add(user.username);
-            } 
+            }
+            foreach (String message in currentLobby.messages)
+            {
+                if (!lobbyMessages.Items.Contains(message))
+                {
+                    lobbyMessages.Items.Add(message);
+                }
+            }
         }
 
         private void sendMessage_Click(object sender, RoutedEventArgs e)

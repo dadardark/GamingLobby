@@ -48,7 +48,5 @@ namespace ClientInterface
                 MessageBox.Show("Username taken.");
             }
         }
-            
-            
     }
 }
