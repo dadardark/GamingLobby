@@ -21,8 +21,8 @@
             <RowDefinition Height="200*"/>
         </Grid.RowDefinitions>
 
-        <Image Name="background" gif:AnimationBehavior.SourceUri="Resources/mkxGif.gif" Grid.RowSpan="2" Grid.ColumnSpan="3"/>
-        <TextBlock x:Name ="login" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" Text="Mortal kombat X" FontFamily="Algerian" Grid.ColumnSpan="3" Margin="64,64,64,64" Foreground="#FFFFEA00" />
+        <Image Name="background" gif:AnimationBehavior.SourceUri="Resources/mkxGif.gif" Grid.RowSpan="2" Grid.ColumnSpan="3" CacheMode="BitmapCache"/>
+        <TextBlock x:Name ="login" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" Text="Mortal kombat X" FontFamily="Algerian" Grid.ColumnSpan="3" Margin="64,128,64,64" Foreground="#FFFFEA00" />
         <Button Name="createUser" Grid.Column="1" Grid.Row="1" Content="Login" Width="200" Height="100" Click="createUserClick" HorizontalAlignment="Center" FontSize="48" FontWeight="Bold" FontFamily="Algerian" Margin="16,150,16,16" Foreground="Red" Background="{x:Null}" BorderThickness="0"/>
         <TextBox x:Name="enterUsername" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Height="60" TextWrapping="WrapWithOverflow" Text="Enter a username" VerticalAlignment="Center" Width="700" FontWeight="Bold" TextAlignment="Center" FontSize="36" Opacity="0.8" Margin="16,0,16,150" Foreground="#FFFFEA00"/>
 
