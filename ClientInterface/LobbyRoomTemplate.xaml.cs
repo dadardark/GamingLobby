@@ -43,8 +43,8 @@ namespace ClientInterface
 
         private void sendMessage_Click(object sender, RoutedEventArgs e)
         {
-            foob.addMessage(lobbyTitle.Text, (DateTime.Now + " " + inUser.username + " : " + enterMessage.Text.ToString()));
-            lobbyMessages.Items.Add(DateTime.Now + " " + inUser.username + " : " + enterMessage.Text.ToString());
+            foob.addMessage(lobbyTitle.Text, ("[" + DateTime.Now + "] " + inUser.username + " : " + enterMessage.Text.ToString()));
+            lobbyMessages.Items.Add("["+DateTime.Now+"] "  + inUser.username + " : " + enterMessage.Text.ToString());
         }
 
         private void updateGUI_Click(object sender, RoutedEventArgs e)

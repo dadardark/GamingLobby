@@ -2,7 +2,7 @@
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
-
+using System.Windows.Media.Imaging;
 using BusinessTier;
 using LobbyDatabase;
 
@@ -24,6 +24,10 @@ namespace ClientInterface
             foob = foobFactory.CreateChannel();
 
             lobby = new Lobby("lobby");
+
+            welcomeText.Text = ("Welcome " + user.username + ".\n Select a lobby to join");
+            profileName.Text = user.username;
+            profileIcon.Source = new BitmapImage(new Uri("Resources/mkxScorpion.gif",UriKind.Relative));
 
             this.user = user;
             foob.addLobby(lobby);
