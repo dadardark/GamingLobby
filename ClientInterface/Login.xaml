@@ -5,15 +5,27 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ClientInterface"
       mc:Ignorable="d" 
-      d:DesignHeight="900" d:DesignWidth="1600"
-      Title="Login">
+      d:DesignHeight="600" d:DesignWidth="1200"
+      Title="Login"
+      xmlns:gif ="https://github.com/XamlAnimatedGif/XamlAnimatedGif">
+
 
     <Grid>
-        <Grid>
-            <TextBox Name ="login" Margin="0,52,0,0" FontSize="72" BorderThickness="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="1092" TextAlignment="Center" Height="208">Login</TextBox>
-            <Button Name="createUser" Content="Create user" Margin="0,685,0,103" Width="426" Click="createUserClick" HorizontalAlignment="Center" FontSize="24"/>
-            <TextBox x:Name="enterUsername" HorizontalAlignment="Center" Height="163" TextWrapping="WrapWithOverflow" Text="Enter a username" VerticalAlignment="Center" Width="496" FontWeight="Bold" TextAlignment="Center" FontSize="36"/>
-        </Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="100*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200*"/>
+            <RowDefinition Height="200*"/>
+        </Grid.RowDefinitions>
+
+        <Image Name="background" gif:AnimationBehavior.SourceUri="Resources/mkxGif.gif" Grid.RowSpan="2" Grid.ColumnSpan="3"/>
+        <TextBlock x:Name ="login" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" Text="Mortal kombat X" FontFamily="Algerian" Grid.ColumnSpan="3" Margin="64,64,64,64" Foreground="#FFFFEA00" />
+        <Button Name="createUser" Grid.Column="1" Grid.Row="1" Content="Login" Width="200" Height="100" Click="createUserClick" HorizontalAlignment="Center" FontSize="48" FontWeight="Bold" FontFamily="Algerian" Margin="16,150,16,16" Foreground="Red" Background="{x:Null}" BorderThickness="0"/>
+        <TextBox x:Name="enterUsername" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Height="60" TextWrapping="WrapWithOverflow" Text="Enter a username" VerticalAlignment="Center" Width="700" FontWeight="Bold" TextAlignment="Center" FontSize="36" Opacity="0.8" Margin="16,0,16,150" Foreground="#FFFFEA00"/>
 
     </Grid>
 </Page>
+
