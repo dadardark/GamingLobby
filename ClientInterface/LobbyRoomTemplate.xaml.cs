@@ -4,12 +4,15 @@ using System.Windows.Controls;
 using System.Windows;
 using BusinessTier;
 using LobbyDatabase;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace ClientInterface
 {   
     public partial class LobbyRoomTemplate : Page
     {
         private IBusinessInterface foob;
+        private CancellationTokenSource cancellationTokenSource;
         Lobby currentLobby;
         User inUser;
         public LobbyRoomTemplate(String lobbyName, User inUser)
@@ -27,18 +30,8 @@ namespace ClientInterface
             currentLobby = foob.getLobby(lobbyName);
 
             lobbyTitle.Text = currentLobby.lobbyName;
-
-            foreach (User user in currentLobby.users)
-            {
-                lobbyUsers.Items.Add(user.username);
-            }
-            foreach (String message in currentLobby.messages)
-            {
-                if (!lobbyMessages.Items.Contains(message))
-                {
-                    lobbyMessages.Items.Add(message);
-                }
-            }
+            cancellationTokenSource = new CancellationTokenSource();
+            startGUIRefresh();
         }
 
         private void sendMessage_Click(object sender, RoutedEventArgs e)
@@ -65,6 +58,48 @@ namespace ClientInterface
                 {
                     lobbyMessages.Items.Add(message);
                 }
+            }
+        }
+
+        public async void startGUIRefresh()
+        {
+            await refreshGUI(cancellationTokenSource.Token);
+        }
+
+        private async Task refreshGUI(CancellationToken cancellationtoken)
+        {
+            try
+            {
+                while (!cancellationtoken.IsCancellationRequested)
+                {
+                    currentLobby = foob.getLobby(lobbyTitle.Text);
+                    lobbyUsers.Items.Clear();
+
+                    foreach (User user in currentLobby.users)
+                    {
+                        if (!lobbyUsers.Items.Contains(user.username))
+                        {
+                            lobbyUsers.Items.Add(user.username);
+                        }
+                    }
+                    foreach (String message in currentLobby.messages)
+                    {
+                        if (!lobbyMessages.Items.Contains(message))
+                        {
+                            lobbyMessages.Items.Add(message);
+                        }
+                    }
+
+                    await Task.Delay(TimeSpan.FromSeconds(0.1), cancellationtoken);
+                }
+            }
+            catch (TaskCanceledException)
+            {
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in loading lobby" + ex.ToString());
             }
         }
         private void exitButton_Click(object sender, RoutedEventArgs e)
