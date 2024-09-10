@@ -102,5 +102,36 @@ namespace BusinessTier
         {
             return lobbyList.Count;
         }
+
+        public bool shareFileStatus(string inLobbyName, string inFileName, byte[] inFileData, string inExtension)
+        {
+            Lobby lobby = getLobby(inLobbyName);
+            if (lobby != null)
+            {
+                lobby.addFile(inFileName, inFileData, inExtension);
+                return true;
+            }
+            return false;
+        }
+
+        public List<string> getAllFiles(string inLobbyName)
+        {
+            Lobby lobby = getLobby(inLobbyName);
+            if (lobby != null)
+            {
+                return lobby.getAllFiles();
+            }
+            return new List<string>();
+        }
+
+        public byte[] downloadFile(string inLobbyName, string inFileName)
+        {
+            Lobby lobby = getLobby(inLobbyName);
+            if (lobby != null)
+            {
+                return lobby.getFile(inFileName);
+            }
+            return null;
+        }
     }
 }
