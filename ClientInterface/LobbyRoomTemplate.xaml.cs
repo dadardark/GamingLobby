@@ -1,11 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.ServiceModel;
-using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Controls;
 using BusinessTier;
 using LobbyDatabase;
-using System.Threading.Tasks;
 using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Microsoft.Win32;
 
 namespace ClientInterface
 {   
@@ -13,6 +18,7 @@ namespace ClientInterface
     {
         private IBusinessInterface foob;
         private CancellationTokenSource cancellationTokenSource;
+        private readonly string[] extensions = { ".jpg", ".jpeg", ".png", ".txt" }; //readonly = final in java
         Lobby currentLobby;
         User inUser;
         public LobbyRoomTemplate(String lobbyName, User inUser)
@@ -38,6 +44,7 @@ namespace ClientInterface
         {
             foob.addMessage(lobbyTitle.Text, ("[" + DateTime.Now + "] " + inUser.username + " : " + enterMessage.Text.ToString()));
             lobbyMessages.Items.Add("["+DateTime.Now+"] "  + inUser.username + " : " + enterMessage.Text.ToString());
+            enterMessage.Clear();
         }
 
         private void updateGUI_Click(object sender, RoutedEventArgs e)
@@ -74,7 +81,7 @@ namespace ClientInterface
                 {
                     currentLobby = foob.getLobby(lobbyTitle.Text);
                     lobbyUsers.Items.Clear();
-
+                    List<string> sharedFiles = foob.getAllFiles(currentLobby.lobbyName);
                     foreach (User user in currentLobby.users)
                     {
                         if (!lobbyUsers.Items.Contains(user.username))
@@ -90,6 +97,13 @@ namespace ClientInterface
                         }
                     }
 
+                    foreach (string fileName in sharedFiles)
+                    {
+                        if (!sharedFilesListView.Items.Contains(fileName))
+                        {
+                            sharedFilesListView.Items.Add(fileName);
+                        }
+                    }
                     await Task.Delay(TimeSpan.FromSeconds(0.1), cancellationtoken);
                 }
             }
@@ -106,6 +120,64 @@ namespace ClientInterface
         {
             foob.removeUser(lobbyTitle.Text, inUser.username);
             this.NavigationService.GoBack();
+        }
+
+        private void shareFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog
+            {
+                Filter = "Acceptable Files|*.jpg;*.jpeg;*.png;*.txt"
+            };
+            if (dialog.ShowDialog() == true)
+            {
+                string fileName = Path.GetFileName(dialog.FileName);
+                string extension = Path.GetExtension(dialog.FileName).ToLower();
+
+                if (extensions.Contains(extension))
+                {
+                    byte[] fileData = File.ReadAllBytes(dialog.FileName);
+
+                    bool status = foob.shareFileStatus(currentLobby.lobbyName, fileName, fileData, extension);
+                    if (status)
+                    {
+                        MessageBox.Show($"File '{fileName}' uploaded !");
+                        startGUIRefresh();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to upload the file.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Only .jpg, .jpeg, .png, or .txt file. are Acceptable! ");
+                }
+            }
+        }
+
+        private void sharedFilesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is ListView listView && listView.SelectedItem is string fileName)
+            {
+                byte[] data = foob.downloadFile(currentLobby.lobbyName, fileName);
+                if (data != null)
+                {
+                    string extension = Path.GetExtension(fileName).ToLower();
+                    SaveFileDialog downloadDialog = new SaveFileDialog
+                    {
+                        FileName = fileName,
+                    };
+                    if (downloadDialog.ShowDialog() == true)
+                    {
+                        File.WriteAllBytes(downloadDialog.FileName, data);
+                        MessageBox.Show($"File '{fileName}' downloaded successfully!");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Failed to download the file.");
+                }
+            }
         }
     }
 }
