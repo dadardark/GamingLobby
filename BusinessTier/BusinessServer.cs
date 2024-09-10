@@ -19,13 +19,13 @@ namespace BusinessTier
         public BusinessServer() 
         {
             lobbyList = new List<Lobby>();
-        } 
+        }
         public bool addLobby(Lobby inLobby)
         {
             foreach (var lobby in lobbyList)
             {
                 if (lobby != null && lobby.lobbyName.Equals(inLobby.lobbyName, StringComparison.OrdinalIgnoreCase))
-                {   
+                {
                     return false;
                 }
             }
@@ -132,6 +132,11 @@ namespace BusinessTier
                 return lobby.getFile(inFileName);
             }
             return null;
+        }
+
+        public List<string> getAllLobbies()
+        {
+            return lobbyList.Select(lobby => lobby.lobbyName).ToList();
         }
     }
 }

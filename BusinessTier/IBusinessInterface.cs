@@ -27,11 +27,11 @@ namespace BusinessTier
         void removeUser(String lobbyName, string inUsername);
         [OperationContract]
         bool shareFileStatus(string inLobbyName, string inFileName, byte[] inFileData, string inExtension);
-
         [OperationContract]
         List<string> getAllFiles(string inLobbyName);
-
         [OperationContract]
         byte[] downloadFile(string inLobbyName, string inFileName);
+        [OperationContract]
+        List<string> getAllLobbies();
     }     
 }
