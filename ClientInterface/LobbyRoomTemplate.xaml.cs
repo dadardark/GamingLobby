@@ -40,27 +40,6 @@ namespace ClientInterface
             lobbyMessages.Items.Add("["+DateTime.Now+"] "  + inUser.username + " : " + enterMessage.Text.ToString());
         }
 
-        private void updateGUI_Click(object sender, RoutedEventArgs e)
-        {
-            currentLobby = foob.getLobby(lobbyTitle.Text);
-            lobbyUsers.Items.Clear();
-
-            foreach (User user in currentLobby.users)
-            {
-                if (!lobbyUsers.Items.Contains(user.username))
-                {
-                    lobbyUsers.Items.Add(user.username);
-                }
-            }
-            foreach(String message in currentLobby.messages)
-            {
-                if (!lobbyMessages.Items.Contains(message))
-                {
-                    lobbyMessages.Items.Add(message);
-                }
-            }
-        }
-
         public async void startGUIRefresh()
         {
             await refreshGUI(cancellationTokenSource.Token);

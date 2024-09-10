@@ -27,7 +27,6 @@
         <ListView Name="lobbyUsers" Grid.Column="2" Grid.Row="1" Background="White" Margin="16,16,16,16"/>
         <TextBox Name="enterMessage" Grid.Row="2" Grid.ColumnSpan="2" Background="White" Margin="16,16,16,16" Text="Enter message" FontSize="36"/>
         <Button Name="sendMessage" Grid.Row="2" Grid.Column="2" Margin="16,16,16,16" Content="Enter" FontSize="24px" Click="sendMessage_Click"/>
-        <Button Name ="updateGUI" Grid.Column="2" Grid.Row="0" Margin="16,16,16,16" Content="Update GUI" FontSize="24px" Click="updateGUI_Click"/>
     </Grid>
 
 </Page>
