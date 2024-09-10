@@ -14,6 +14,7 @@ namespace LobbyDatabase
         public List<User> users;
         public List<String> messages;
         private Dictionary<string, Tuple<byte[], string>> sharedFiles;
+        private List<PrivateMessage> privateMessages;
 
         private Lobby() 
         {
@@ -21,6 +22,7 @@ namespace LobbyDatabase
             users = new List<User>();
             messages = new List<String>();
             sharedFiles = new Dictionary<string, Tuple<byte[], string>>();
+            privateMessages = new List<PrivateMessage>();
         }
         public Lobby(string lobbyName)
         {
@@ -28,6 +30,7 @@ namespace LobbyDatabase
             users = new List<User>();
             messages = new List<String>();
             sharedFiles = new Dictionary<string, Tuple<byte[], string>>();
+            privateMessages = new List<PrivateMessage>();
         }
 
         public void setName(String inName)
@@ -83,6 +86,19 @@ namespace LobbyDatabase
                 return fileTuple.Item2;
             }
             return null;
+        }
+
+        public void addPrivateMessage(string inSender,string inReceipient, string inMessage)
+        {
+            privateMessages.Add(new PrivateMessage(inSender, inReceipient, inMessage));
+        }
+
+        public List<PrivateMessage> getPrivateMessages(string user1, string user2)
+        {
+            var messages = privateMessages.Where(pm => (pm.sender == user1 && pm.recepient == user2) || (pm.sender == user2 && pm.recepient == user1));
+            var arrangedMessages = messages.OrderBy(pm => pm.timeStamp);
+            List<PrivateMessage> result = arrangedMessages.ToList();
+            return result;
         }
     }
 }
