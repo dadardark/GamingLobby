@@ -122,7 +122,7 @@ namespace ClientInterface
             this.NavigationService.GoBack();
         }
 
-        private void shareFileButton_Click(object sender, RoutedEventArgs e)
+        private async void shareFileButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog
             {
@@ -135,18 +135,27 @@ namespace ClientInterface
 
                 if (extensions.Contains(extension))
                 {
-                    byte[] fileData = File.ReadAllBytes(dialog.FileName);
+                    List<string> currentFiles = await Task.Run(() => foob.getAllFiles(currentLobby.lobbyName));
 
-                    bool status = foob.shareFileStatus(currentLobby.lobbyName, fileName, fileData, extension);
-                    if (status)
+                    if(currentFiles.Contains(fileName))
                     {
-                        MessageBox.Show($"File '{fileName}' uploaded !");
-                        startGUIRefresh();
+                        MessageBox.Show("Failed to upload the file : File with the same name uploaded before");
                     }
                     else
                     {
-                        MessageBox.Show("Failed to upload the file.");
+                        byte[] fileData = File.ReadAllBytes(dialog.FileName);
+                        bool status = foob.shareFileStatus(currentLobby.lobbyName, fileName, fileData, extension);
+                        if (status)
+                        {
+                            MessageBox.Show($"File '{fileName}' uploaded !");
+                            startGUIRefresh();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to upload the file.");
+                        }
                     }
+
                 }
                 else
                 {
