@@ -32,6 +32,8 @@ namespace BusinessTier
         [OperationContract]
         byte[] downloadFile(string inLobbyName, string inFileName);
         [OperationContract]
-        List<string> getAllLobbies();
+        void SendPrivateMessage(string lobbyName, string sender, string recipient, string message);
+        [OperationContract]
+        Dictionary<string, List<string>> GetPrivateMessages(string lobbyName, string user1, string user2);
     }     
 }

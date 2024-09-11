@@ -63,7 +63,6 @@ namespace BusinessTier
         public bool getUser(String lobbyName, String inUsername) 
         {
             Lobby inLobby = getLobby(lobbyName);
-            
             if(inLobby == null)
             {
                 Debug.WriteLine("Not returning a lobby");
@@ -134,9 +133,23 @@ namespace BusinessTier
             return null;
         }
 
-        public List<string> getAllLobbies()
+        public void SendPrivateMessage(string inLobbyName, string inSender, string inRecipient, string inMessage)
         {
-            return lobbyList.Select(lobby => lobby.lobbyName).ToList();
+            Lobby lobby = getLobby(inLobbyName);
+            if (lobby != null)
+            {
+                lobby.addPrivateMessage(inSender, inRecipient, inMessage);  
+            }
+        }
+
+        public Dictionary<string, List<string>> GetPrivateMessages(string inLobbyName, string user1, string user2)
+        {
+            Lobby lobby = getLobby(inLobbyName);
+            if (lobby != null)
+            {
+                return lobby.getPrivateMessages(user1, user2);
+            }
+            return new Dictionary<string, List<string>>();
         }
     }
 }

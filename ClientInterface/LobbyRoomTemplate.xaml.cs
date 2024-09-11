@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.Win32;
+using System.IO.Packaging;
 
 namespace ClientInterface
 {   
@@ -19,6 +20,7 @@ namespace ClientInterface
         private IBusinessInterface foob;
         private CancellationTokenSource cancellationTokenSource;
         private readonly string[] extensions = { ".jpg", ".jpeg", ".png", ".txt" }; //readonly = final in java
+        private string selectedUser;
         Lobby currentLobby;
         User inUser;
         public LobbyRoomTemplate(String lobbyName, User inUser)
@@ -104,6 +106,11 @@ namespace ClientInterface
                             sharedFilesListView.Items.Add(fileName);
                         }
                     }
+                    if (!string.IsNullOrEmpty(selectedUser))
+                    {
+                        receipient.Text = selectedUser;
+                        loadPM();
+                    }
                     await Task.Delay(TimeSpan.FromSeconds(0.1), cancellationtoken);
                 }
             }
@@ -116,6 +123,7 @@ namespace ClientInterface
                 Console.WriteLine("Error in loading lobby" + ex.ToString());
             }
         }
+
         private void exitButton_Click(object sender, RoutedEventArgs e)
         {
             foob.removeUser(lobbyTitle.Text, inUser.username);
@@ -185,6 +193,74 @@ namespace ClientInterface
                 else
                 {
                     MessageBox.Show("Failed to download the file.");
+                }
+            }
+        }
+
+        private async void sendPMButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(string.IsNullOrEmpty(selectedUser))
+            {
+                MessageBox.Show("Please DoubleClickto select a Receipient!");
+                return;
+            }
+            string message = pmTextBox.Text;
+            if(string.IsNullOrEmpty(message))
+            {
+
+            }
+            else
+            {
+                foob.SendPrivateMessage(currentLobby.lobbyName, inUser.username, selectedUser, message);
+                pmTextBox.Clear();
+                loadPM();
+            }
+        }
+
+        private void lobbyUsers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is ListView listView && listView.SelectedItem is string selectedUser)
+            {
+                if (selectedUser.Equals(inUser.username))
+                {
+                    MessageBox.Show("Please select user other than you");
+                    return;
+                }
+                else
+                {
+                    receipient.Text = selectedUser;
+                    this.selectedUser = selectedUser;
+                    loadPM();
+
+                }
+
+            }
+        }
+
+        private void loadPM()
+        {
+            if (!string.IsNullOrEmpty(selectedUser))
+            {
+                Dictionary<string, List<string>> messages = foob.GetPrivateMessages(currentLobby.lobbyName, inUser.username, selectedUser);
+
+                pmListView.Items.Clear();
+                if (messages.ContainsKey(inUser.username))
+                {
+                    foreach (var message in messages[inUser.username])
+                    {
+                        pmListView.Items.Add(message);
+                    }
+                }
+                if (messages.ContainsKey(selectedUser))
+                {
+                    foreach (var message in messages[selectedUser])
+                    {
+                        pmListView.Items.Add(message);
+                    }
+                }
+                if (pmListView.Items.Count > 0)
+                {
+                    pmListView.ScrollIntoView(pmListView.Items[pmListView.Items.Count - 1]);
                 }
             }
         }
