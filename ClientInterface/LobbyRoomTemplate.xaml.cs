@@ -212,10 +212,6 @@ namespace ClientInterface
             else
             {
                 foob.SendPrivateMessage(currentLobby.lobbyName, inUser.username, selectedUser, message);
-                if(foob.GetPrivateMessages(currentLobby.lobbyName, inUser.username, selectedUser) == null)
-                {
-                    MessageBox.Show("null is found");
-                }
                 pmTextBox.Clear();
                 loadPM();
             }
@@ -245,8 +241,23 @@ namespace ClientInterface
         {
             if (!string.IsNullOrEmpty(selectedUser))
             {
-                List<PrivateMessage> messages = foob.GetPrivateMessages(currentLobby.lobbyName, inUser.username, selectedUser);
-                pmListView.ItemsSource = messages;
+                Dictionary<string, List<string>> messages = foob.GetPrivateMessages(currentLobby.lobbyName, inUser.username, selectedUser);
+
+                pmListView.Items.Clear();
+                if (messages.ContainsKey(inUser.username))
+                {
+                    foreach (var message in messages[inUser.username])
+                    {
+                        pmListView.Items.Add(message);
+                    }
+                }
+                if (messages.ContainsKey(selectedUser))
+                {
+                    foreach (var message in messages[selectedUser])
+                    {
+                        pmListView.Items.Add(message);
+                    }
+                }
                 if (pmListView.Items.Count > 0)
                 {
                     pmListView.ScrollIntoView(pmListView.Items[pmListView.Items.Count - 1]);

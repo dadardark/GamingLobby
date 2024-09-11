@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace LobbyDatabase
 {
     public class PrivateMessage
@@ -20,5 +21,7 @@ namespace LobbyDatabase
             message = inMessage;
             timeStamp = DateTime.Now;
         }
+
+        public PrivateMessage() { }
     }
 }

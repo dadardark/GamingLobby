@@ -141,15 +141,15 @@ namespace BusinessTier
                 lobby.addPrivateMessage(inSender, inRecipient, inMessage);  
             }
         }
-        
-        public List<PrivateMessage> GetPrivateMessages(string inLobbyName, string user1, string user2)
+
+        public Dictionary<string, List<string>> GetPrivateMessages(string inLobbyName, string user1, string user2)
         {
             Lobby lobby = getLobby(inLobbyName);
             if (lobby != null)
             {
                 return lobby.getPrivateMessages(user1, user2);
             }
-            return null; 
+            return new Dictionary<string, List<string>>();
         }
     }
 }

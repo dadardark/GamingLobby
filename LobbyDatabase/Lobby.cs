@@ -93,11 +93,30 @@ namespace LobbyDatabase
             privateMessages.Add(new PrivateMessage(inSender, inReceipient, inMessage));
         }
 
-        public List<PrivateMessage> getPrivateMessages(string user1, string user2)
+        public Dictionary<string, List<string>> getPrivateMessages(string user1, string user2)
         {
-            var messages = privateMessages.Where(pm => (pm.sender == user1 && pm.recepient == user2) || (pm.sender == user2 && pm.recepient == user1));
-            var arrangedMessages = messages.OrderBy(pm => pm.timeStamp);
-            List<PrivateMessage> result = arrangedMessages.ToList();
+            var messages = privateMessages.Where(pm =>
+                (pm.sender == user1 && pm.recepient == user2) ||
+                (pm.sender == user2 && pm.recepient == user1))
+                .OrderBy(pm => pm.timeStamp);
+
+            var result = new Dictionary<string, List<string>>();
+            result[user1] = new List<string>();
+            result[user2] = new List<string>();
+
+            foreach (var pm in messages)
+            {
+                string formattedMessage = $"[{pm.timeStamp}] {pm.sender}: {pm.message}";
+                if (pm.sender == user1)
+                {
+                    result[user1].Add(formattedMessage);
+                }
+                else
+                {
+                    result[user2].Add(formattedMessage);
+                }
+            }
+
             return result;
         }
     }
