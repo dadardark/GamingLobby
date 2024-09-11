@@ -19,13 +19,13 @@ namespace BusinessTier
         public BusinessServer() 
         {
             lobbyList = new List<Lobby>();
-        } 
+        }
         public bool addLobby(Lobby inLobby)
         {
             foreach (var lobby in lobbyList)
             {
                 if (lobby != null && lobby.lobbyName.Equals(inLobby.lobbyName, StringComparison.OrdinalIgnoreCase))
-                {   
+                {
                     return false;
                 }
             }
