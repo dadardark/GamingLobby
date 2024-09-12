@@ -35,5 +35,7 @@ namespace BusinessTier
         void SendPrivateMessage(string lobbyName, string sender, string recipient, string message);
         [OperationContract]
         Dictionary<string, List<string>> GetPrivateMessages(string lobbyName, string user1, string user2);
+        [OperationContract]
+        List<string> getAllLobbies();
     }     
 }

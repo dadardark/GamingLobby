@@ -151,5 +151,9 @@ namespace BusinessTier
             }
             return new Dictionary<string, List<string>>();
         }
+        public List<string> getAllLobbies()
+        {
+            return lobbyList.Select(lobby => lobby.lobbyName).ToList();
+        }
     }
 }

@@ -27,13 +27,12 @@
         <Button Name="sendMessage" Grid.Row="2" Grid.Column="2" Content="Send" FontSize="36"  Margin="16,16,16,16" Click="sendMessage_Click" Height="88" VerticalAlignment="Center"/>
 
         <StackPanel Grid.Column="2" Grid.Row="0" Margin="16">
-            <Button Name="updateGUI" Content="Update GUI" FontSize="18" Padding="10,5" Click="updateGUI_Click"/>
-            <Button Name="shareFileButton" Content="Share File" FontSize="18" Padding="10,5" Margin="0,5,0,0" Click="shareFileButton_Click"/>
+            <Button Name="shareFileButton" Content="Share File" FontSize="18" Padding="5,5" Margin="0,5,0,0" Click="shareFileButton_Click"/>
         </StackPanel>
 
         <StackPanel  Margin="16" Orientation="Vertical" Grid.Column="2" Grid.Row="1">
             <TextBlock Text="Shared Files:" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
-            <ListView Name="sharedFilesListView" Background="White" Height="515" MouseDoubleClick="sharedFilesListView_MouseDoubleClick"/>
+            <ListView Name="sharedFilesListView" Background="White" Height="500" MouseDoubleClick="sharedFilesListView_MouseDoubleClick"/>
         </StackPanel>
 
         <StackPanel Grid.Column="0" Grid.Row="1" Margin="16" Orientation="Vertical">
@@ -41,7 +40,7 @@
             <ListView Name="lobbyUsers" Background="White" Height="240"  MouseDoubleClick="lobbyUsers_MouseDoubleClick"/>
             <TextBlock Text="Private Messages:" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
             <TextBlock Name="receipient"  FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
-            <ListView Name="pmListView" Background="White" Height="240"/>
+            <ListView Name="pmListView" Background="White" Height="200"/>
         </StackPanel>
 
         <StackPanel Grid.Column="0" Grid.Row="2" Margin="16,16,16,0" Orientation="Vertical">
