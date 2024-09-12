@@ -55,7 +55,7 @@
                 </Border>
 
                 <Button x:Name="createUser" Content="LOGIN" Height="50" Margin="200,20,200,20"
-                        Click="createUserClick" Style="{StaticResource MKLoginButtonStyle}"/>
+                        Click="createUserClick" FontFamily="Algerian" Style="{StaticResource MKLoginButtonStyle}"/>
             </StackPanel>
         </Border>
     </Grid>
