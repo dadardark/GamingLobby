@@ -7,25 +7,56 @@
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1200"
       Title="Login"
-      xmlns:gif ="https://github.com/XamlAnimatedGif/XamlAnimatedGif">
+      xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif">
 
+    <Page.Resources>
+        <Style x:Key="MKLoginButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FFFFEA00"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontFamily" Value="Arial Black"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="20,10"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFFF4500"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100*"/>
-            <ColumnDefinition Width="200*"/>
-            <ColumnDefinition Width="100*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="200*"/>
-            <RowDefinition Height="200*"/>
-        </Grid.RowDefinitions>
+        <Image gif:AnimationBehavior.SourceUri="Resources/mkxGif.gif" Stretch="UniformToFill"/>
 
-        <Image Name="background" gif:AnimationBehavior.SourceUri="Resources/mkxGif.gif" Grid.RowSpan="2" Grid.ColumnSpan="3" CacheMode="BitmapCache"/>
-        <TextBlock x:Name ="login" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" Text="Mortal kombat X" FontFamily="Algerian" Grid.ColumnSpan="3" Margin="64,128,64,64" Foreground="#FFFFEA00" />
-        <Button Name="createUser" Grid.Column="1" Grid.Row="1" Content="Login" Width="200" Height="100" Click="createUserClick" HorizontalAlignment="Center" FontSize="48" FontWeight="Bold" FontFamily="Algerian" Margin="16,150,16,16" Foreground="Red" Background="{x:Null}" BorderThickness="0"/>
-        <TextBox x:Name="enterUsername" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Height="60" TextWrapping="WrapWithOverflow" Text="Enter a username" VerticalAlignment="Center" Width="700" FontWeight="Bold" TextAlignment="Center" FontSize="36" Opacity="0.8" Margin="16,0,16,150" Foreground="#FFFFEA00"/>
+        <Border Background="#80000000" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                Width="800" Height="400" CornerRadius="20">
+            <StackPanel VerticalAlignment="Center" Margin="20">
+                <TextBlock Text="MORTAL KOMBAT X" FontFamily="Algerian" FontSize="60" Foreground="#FFFFEA00" 
+                           HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
+                <Border Background="#40FFFFFF" CornerRadius="5" Margin="100,20,100,20">
+                    <TextBox x:Name="enterUsername" Height="40" Background="Transparent" BorderThickness="0"
+                             Foreground="White" FontSize="18" Padding="10,5" CaretBrush="White"
+                             Text="Enter a username" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
+                </Border>
+
+                <Button x:Name="createUser" Content="LOGIN" Height="50" Margin="200,20,200,20"
+                        Click="createUserClick" Style="{StaticResource MKLoginButtonStyle}"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </Page>
-

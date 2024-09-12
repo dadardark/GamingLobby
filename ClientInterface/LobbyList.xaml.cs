@@ -10,6 +10,7 @@ using BusinessTier;
 using LobbyDatabase;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Windows.Media;
 
 namespace ClientInterface
 {
@@ -62,8 +63,10 @@ namespace ClientInterface
                             {
                                 Content = lobbyName,
                                 Width = 200,
-                                Margin = new Thickness(0, 10, 0, 0)
+                                Margin = new Thickness(0, 10, 0, 0),
+                                Style = (Style)FindResource("MKButtonStyle")
                             };
+                            lobbyButton.Foreground = new SolidColorBrush(Colors.Black);
                             lobbyButton.Click += lobbyButton_Click;
                             lobbyListPanel.Children.Add(lobbyButton);
                         }
