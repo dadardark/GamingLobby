@@ -35,7 +35,12 @@ namespace ClientInterface
                 return;
             }
 
-            if (foob.getUser(loginLobby.lobbyName,newUsername))
+            if(newUsername.Equals("Enter a username"))
+            {
+                MessageBox.Show("Enter a username with atleast 1 character");
+            }
+
+            else if (foob.getUser(loginLobby.lobbyName,newUsername))
             {
                 User newUser = new User(newUsername);
                 foob.addUser(loginLobby.lobbyName,newUser);
