@@ -140,5 +140,9 @@
   <ItemGroup>
     <Resource Include="Resources\mkxScorpion.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\mk_LobbyList.jpg" />
+    <Resource Include="Resources\mk_LobbyRoom.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

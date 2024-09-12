@@ -7,8 +7,57 @@
       mc:Ignorable="d" 
       d:DesignHeight="900" d:DesignWidth="1600"
       Title="LobbyRoomTemplate">
-    
+
+    <Page.Resources>
+        <Style x:Key="MKButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FFFFEA00"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontFamily" Value="Arial Black"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFFF4500"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="MKTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#FFFFEA00"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="2" Color="Black"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="MKListViewStyle" TargetType="ListView">
+            <Setter Property="Background" Value="#80000000"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FFFFEA00"/>
+            <Setter Property="BorderThickness" Value="2"/>
+        </Style>
+    </Page.Resources>
+
     <Grid x:Name="gridMain" Margin="0,10,0,0">
+        <Grid.Background>
+            <ImageBrush ImageSource="Resources/mk_LobbyRoom.gif" Stretch="UniformToFill"/>
+        </Grid.Background>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300*"/>
             <ColumnDefinition Width="1173*"/>
@@ -20,33 +69,53 @@
             <RowDefinition Height="146"/>
         </Grid.RowDefinitions>
 
-        <Button Grid.Column="0" Grid.Row="0" Name="exitButton" Content="Exit" Margin="16,16,16,16" FontSize="24" Padding="10,5" Click="exitButton_Click" Width="100"/>
-        <TextBlock Grid.Column="1" Grid.Row="0" Name="lobbyTitle" Text="Lobby Name" Margin="16,0,0,0"  HorizontalAlignment="Center"  VerticalAlignment="Center" FontSize="48" FontWeight="Bold"/>
-        <ListView Name="lobbyMessages"  Grid.Column="1" Grid.Row="1" Background="White" Margin="16" FontSize="18"/>
-        <TextBox Name="enterMessage" Grid.Column="1" Grid.Row="2" Background="White" FontSize="18" VerticalContentAlignment="Center" Padding="5" Margin="16,16,16,16" />
-        <Button Name="sendMessage" Grid.Row="2" Grid.Column="2" Content="Send" FontSize="36"  Margin="16,16,16,16" Click="sendMessage_Click" Height="88" VerticalAlignment="Center"/>
+        <Button Grid.Column="0" Grid.Row="0" Name="exitButton" Content="Exit" 
+                Margin="16" FontSize="24" Padding="10,5" Click="exitButton_Click" 
+                Width="100" FontFamily="Algerian" Style="{StaticResource MKButtonStyle}"/>
+        <TextBlock Grid.Column="1" Grid.Row="0" Name="lobbyTitle" Text="Lobby Name" 
+                   Margin="16,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   FontSize="48" FontWeight="Bold" FontFamily="Algerian" Style="{StaticResource MKTextBlockStyle}"/>
+        <ListView Name="lobbyMessages" Grid.Column="1" Grid.Row="1" 
+                  Margin="16" FontSize="18" Style="{StaticResource MKListViewStyle}"/>
+        <TextBox Name="enterMessage" Grid.Column="1" Grid.Row="2" 
+                 Background="#40FFFFFF" Foreground="White" FontSize="18" 
+                 VerticalContentAlignment="Center" Padding="5" Margin="16"/>
+        <Button Name="sendMessage" Grid.Row="2" Grid.Column="2" Content="Send" 
+                FontSize="36" Margin="16" Click="sendMessage_Click" Height="88" 
+                VerticalAlignment="Center" FontFamily="Algerian" Style="{StaticResource MKButtonStyle}"/>
 
         <StackPanel Grid.Column="2" Grid.Row="0" Margin="16">
-            <Button Name="shareFileButton" Content="Share File" FontSize="18" Padding="5,5" Margin="0,5,0,0" Click="shareFileButton_Click"/>
+            <Button Name="shareFileButton" Content="Share File" FontSize="18" 
+                    Padding="5,5" Margin="0,5,0,0" Click="shareFileButton_Click" 
+                    FontFamily="Algerian" Style="{StaticResource MKButtonStyle}"/>
         </StackPanel>
 
-        <StackPanel  Margin="16" Orientation="Vertical" Grid.Column="2" Grid.Row="1">
-            <TextBlock Text="Shared Files:" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
-            <ListView Name="sharedFilesListView" Background="White" Height="500" MouseDoubleClick="sharedFilesListView_MouseDoubleClick"/>
+        <StackPanel Margin="16" Orientation="Vertical" Grid.Column="2" Grid.Row="1">
+            <TextBlock Text="Shared Files:" FontSize="18" FontWeight="Bold" 
+                       Margin="0,0,0,10" FontFamily="Algerian" Style="{StaticResource MKTextBlockStyle}"/>
+            <ListView Name="sharedFilesListView" Height="500" 
+                      MouseDoubleClick="sharedFilesListView_MouseDoubleClick" 
+                      Style="{StaticResource MKListViewStyle}"/>
         </StackPanel>
 
         <StackPanel Grid.Column="0" Grid.Row="1" Margin="16" Orientation="Vertical">
-            <TextBlock Text="Users in Lobby:" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
-            <ListView Name="lobbyUsers" Background="White" Height="240"  MouseDoubleClick="lobbyUsers_MouseDoubleClick"/>
-            <TextBlock Text="Private Messages:" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
-            <TextBlock Name="receipient"  FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
-            <ListView Name="pmListView" Background="White" Height="200"/>
+            <TextBlock Text="Users in Lobby:" FontSize="18" FontWeight="Bold" 
+                       Margin="0,0,0,10" FontFamily="Algerian" Style="{StaticResource MKTextBlockStyle}"/>
+            <ListView Name="lobbyUsers" Height="240" 
+                      MouseDoubleClick="lobbyUsers_MouseDoubleClick" 
+                      Style="{StaticResource MKListViewStyle}"/>
+            <TextBlock Text="Private Messages:" FontSize="18" FontWeight="Bold" 
+                       Margin="0,10,0,10" FontFamily="Algerian" Style="{StaticResource MKTextBlockStyle}"/>
+            <TextBlock Name="receipient" FontSize="18" FontWeight="Bold" 
+                       Margin="0,0,0,10" Style="{StaticResource MKTextBlockStyle}"/>
+            <ListView Name="pmListView" Height="200" Style="{StaticResource MKListViewStyle}"/>
         </StackPanel>
 
         <StackPanel Grid.Column="0" Grid.Row="2" Margin="16,16,16,0" Orientation="Vertical">
-            <TextBox Name="pmTextBox" Background="White" Height="70"/>
-            <Button Name="sendPrivateMessageButton" Content="Send Private Message" Margin="0,10,0,0" FontSize="20" Click="sendPMButton_Click"/>
+            <TextBox Name="pmTextBox" Background="#40FFFFFF" Foreground="White" Height="70"/>
+            <Button Name="sendPrivateMessageButton" Content="Send Private Message" 
+                    Margin="0,10,0,0" FontSize="20" Click="sendPMButton_Click" 
+                    FontFamily="Algerian" Style="{StaticResource MKButtonStyle}"/>
         </StackPanel>
-
     </Grid>
 </Page>
