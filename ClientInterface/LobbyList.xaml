@@ -80,7 +80,8 @@
             <StackPanel VerticalAlignment="Center" Margin="10">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
                     <TextBox x:Name="newLobbyNameTextBox" Width="200" Margin="0,0,10,0" Style="{DynamicResource MKTextBoxStyle}"/>
-                    <Button Content="Create Lobby" Click="CreateLobbyButton_Click" Width="150" Style="{DynamicResource MKButtonStyle}"/>
+                    <Button Content="Create Lobby" Click="CreateLobbyButton_Click" Width="150" 
+                            FontFamily="Algerian" Style="{DynamicResource MKButtonStyle}"/>
                 </StackPanel>
                 <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="200">
                     <StackPanel x:Name="lobbyListPanel">
@@ -91,6 +92,7 @@
         </Border>
 
         <Button Name="logoutButton" Grid.Row="4" Grid.Column="1" Content="Log out" 
-                Margin="10" Click="logoutButton_Click" Style="{DynamicResource MKButtonStyle}"/>
+                Margin="10" Click="logoutButton_Click" FontFamily="Algerian"
+                Style="{DynamicResource MKButtonStyle}"/>
     </Grid>
 </Page>
