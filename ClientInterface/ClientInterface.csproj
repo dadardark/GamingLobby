@@ -144,5 +144,20 @@
     <Resource Include="Resources\mk_LobbyList.jpg" />
     <Resource Include="Resources\mk_LobbyRoom.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\buttonSound.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled video - Made with Clipchamp.mp4" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\buttonClick.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16 - Moonsiders 1st.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bgMusic.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

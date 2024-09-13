@@ -11,6 +11,8 @@ using LobbyDatabase;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Media;
+using System.IO;
+using System.Media;
 
 namespace ClientInterface
 {
@@ -87,6 +89,7 @@ namespace ClientInterface
 
         private void lobbyButton_Click(object sender, RoutedEventArgs e)
         {
+            buttonSound();
             string lobbyName = (sender as Button).Content.ToString();
             foob.addUser(lobbyName, user);
             this.NavigationService.Navigate(new LobbyRoomTemplate(lobbyName, user));
@@ -106,6 +109,7 @@ namespace ClientInterface
         private void CreateLobbyButton_Click(object sender, RoutedEventArgs e)
         {
             string newLobbyName = newLobbyNameTextBox.Text.Trim();
+            buttonSound();
 
             // Input validation
             if (string.IsNullOrWhiteSpace(newLobbyName))
@@ -147,6 +151,12 @@ namespace ClientInterface
             {
                 MessageBox.Show($"An error occurred while creating the lobby: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+        private void buttonSound()
+        {
+            Stream soundStream = Properties.Resources.buttonClick;
+            SoundPlayer soundPlayer = new SoundPlayer(soundStream);
+            soundPlayer.Play();
         }
     }
 }

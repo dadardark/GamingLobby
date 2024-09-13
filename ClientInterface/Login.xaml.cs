@@ -1,4 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.Media;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,11 +26,12 @@ namespace ClientInterface
             foob = foobFactory.CreateChannel();
 
             loginLobby = new Lobby("Default Lobby");
-            foob.addLobby(loginLobby); 
+            foob.addLobby(loginLobby);
         }   
         private void createUserClick(object sender, RoutedEventArgs e)
         {
             string newUsername = enterUsername.Text.ToString();
+            buttonSound();
 
             if (foob == null)
             {
@@ -70,6 +74,13 @@ namespace ClientInterface
             {
                 textBox.Text = "Enter a username";
             }
+        }
+
+        private void buttonSound()
+        {
+            Stream soundStream = Properties.Resources.buttonClick;
+            SoundPlayer soundPlayer = new SoundPlayer(soundStream);
+            soundPlayer.Play();
         }
     }
 }
